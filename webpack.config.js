@@ -79,6 +79,7 @@ outputs.forEach(info => {
 
   // plain unoptimized unminified bundle
   const bundle = Object.assign({}, common, {
+    mode: 'development',
     output: {
       path: path.join(__dirname, 'dist'),
       filename: info.filenameBase + '.js',
@@ -95,25 +96,14 @@ outputs.forEach(info => {
 
   // optimized and minified bundle
   const minify = Object.assign({}, common, {
+    mode: 'production',
     output: {
       path: path.join(__dirname, 'dist'),
       filename: info.filenameBase + '.min.js',
       library: info.library || '[name]',
       libraryTarget: info.libraryTarget || 'umd'
     },
-    devtool: 'cheap-module-source-map',
-    plugins: [
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true,
-        compress: {
-          warnings: true
-        },
-        output: {
-          comments: false
-        }
-        //beautify: true
-      })
-    ]
+    devtool: 'cheap-module-source-map'
   });
   if(info.library === null) {
     delete minify.output.library;
