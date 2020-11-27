@@ -117,5 +117,8 @@
     "buffer": false,
     "crypto": false,
     "process": false
+  },
+  "dependencies": {
+    "moment": "^2.29.1"
   }
 }
